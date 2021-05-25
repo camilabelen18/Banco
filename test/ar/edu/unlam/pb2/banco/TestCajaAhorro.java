@@ -35,16 +35,14 @@ public class TestCajaAhorro {
 		String nombreTitular="Camila";
 		final Double montoAdepositar=100.0;
 		final Double montoAextraer=100.0;
-		final Double valorEsperado=0.0;
 		
 		//Ejecucion
 		CajaAhorro cajaAhorro= new CajaAhorro(nombreTitular);
 		cajaAhorro.depositar(montoAdepositar);
-		cajaAhorro.extraer(montoAextraer);
-		final Double valorObtenido=cajaAhorro.getSaldo();
+		;
 				
 		//Verificacion
-		assertEquals(valorEsperado,valorObtenido);
+		assertTrue(cajaAhorro.extraer(montoAextraer));
 	}
 	
 	@Test
@@ -88,6 +86,44 @@ public class TestCajaAhorro {
 				
 		//Verificacion
 		assertEquals(valorEsperado,valorObtenido);
+	}
+	
+	@Test
+	public void testQueNOPermitaExtraerEnUnaCajaDeAhorroEnLaSextaExtraccionCuandoElMontoAExtraerSuperaAlSaldo(){
+		//Datos de entrada
+		String nombreTitular="Camila";
+		final Double montoAdepositar=100.0;
+		
+		//Ejecucion
+		CajaAhorro cajaAhorro= new CajaAhorro(nombreTitular);
+		cajaAhorro.depositar(montoAdepositar);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		
+		//Verificacion
+		assertFalse(cajaAhorro.extraer(100.0));
+	}
+	
+	@Test
+	public void	testQueNOPermitaExtraerEnUnaCajaDeAhorroEnLaSextaExtraccionCuandoElMontoAExtraerSuperaAlSaldoMasElCostoAdicional() {
+		//Datos de entrada
+		String nombreTitular="Camila";
+		final Double montoAdepositar=100.0;
+		
+		//Ejecucion
+		CajaAhorro cajaAhorro= new CajaAhorro(nombreTitular);
+		cajaAhorro.depositar(montoAdepositar);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		cajaAhorro.extraer(10.0);
+		
+		//Verificacion
+		assertFalse(cajaAhorro.extraer(57.0));	
 	}
 
 }

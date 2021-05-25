@@ -12,6 +12,7 @@ public class CuentaCorriente extends Cuenta{
 		this.descubiertoAusar = 0.0;
 		this.deuda = 0.0;
 	}
+	
 
 	@Override
 	public Boolean extraer(Double montoAextraer) {
